@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
+<head>
+<title>Pesquisa de Computadores</title>
+</head>
+
+<section layout:fragment="conteudo">
+
+	<div layout:include="MensagemGeral"></div>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="clearfix">
+				<h1 class="panel-title aw-titulo-panel">Pesquisa de
+					Computadores</h1>
+				<a class="btn btn-link aw-link-panel"
+					th:href="@{/cadastroComputador/novo}">Cadastrar Computador</a>
+			</div>
+		</div>
+
+		<div class="panel-body">
+			<form method="GET" class="form-horizontal"
+				th:action="@{/cadastroComputador}" th:object="${filtro}">
+				<div class="form-group">
+					<div class="col-sm-4">
+						<div class="input-group">
+							<input class="form-control"
+								placeholder="Qual computador você está procurando?"
+								autofocus="autofocus" th:field="*{nomeCodigo}"></input> <span
+								class="input-group-btn">
+								<button type="submit" class="btn btn-default">
+									<i class="glyphicon glyphicon-search"></i>
+								</button>
+							</span>
+						</div>
+					</div>
+				</div>
+			</form>
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th class="text-center ">#</th>
+							<th class="text-center ">Sigla Unidade</th>
+							<th class="text-center col-md-1">Usuário</th>
+							<th class="text-center col-md-1">Nome/Código</th>
+							<th class="text-center col-md-1">Nº IP</th>
+							<th class="text-center col-md-1">Placa Mãe</th>
+							<th class="text-center col-md-1">Processador</th>
+							<th class="text-center col-md-1">Memoria RAM</th>
+							<th class="text-center col-md-1">Disco Rígido</th>
+							<th class="text-center col-md-1">Tipo Computador</th>
+							<th class="text-center col-md-1">Sistema Operacional</th>
+							<th class="text-center col-md-1">Técnico</th>
+							<th class="text-center col-md-1">Data Cadastro</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="comp : ${todosComputadores}">
+							<td class="text-center" th:text="${comp.idComp}">1</td>
+							<td class="text-center" th:text="${comp.unidade.siglaUnidade}"></td>
+							<td th:text="${comp.usuario}"></td>
+							<td class="text-center" th:text="${comp.nomeCodigo}"></td>
+							<td class="text-center" th:text="${comp.numIp}"></td>
+							<td class="text-center" th:text="${comp.placaMae}"></td>
+							<td class="text-center" th:text="${comp.processador}"></td>
+							<td class="text-center" th:text="${comp.memoriaRam}"></td>
+							<td class="text-center" th:text="${comp.hd}"></td>
+							<td class="text-center" th:text="${comp.tipoComp}"></td>
+							<td class="text-center" th:text="${comp.sistOper}"></td>
+							<td class="text-center" th:text="${comp.tecnico}"></td>
+							<td class="text-center" th:text="${{comp.dataCadastro}}"></td>
+							<td class="text-center"><a class="btn btn-link btn-xs"
+								th:href="@{/cadastroComputador/{codComp}(codComp=${comp.idComp})}"
+								title="Editar" rel="tooltip" data-placement="top"> <span
+									class="glyphicon glyphicon-pencil"></span>
+							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
+								data-target="#confirmacaoExclusaoComputador"
+								th:attr="data-id_comp=${comp.idComp}, data-nome_codigo=${comp.nomeCodigo}"
+								title="Excluir" rel="tooltip" data-placement="top"> <span
+									class="glyphicon glyphicon-remove"></span>
+							</a></td>
+						</tr>
+						<tr>
+							<td colspan="6" th:if="${#lists.isEmpty(todosComputadores)}">Nenhum
+								Computador foi encontrada</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div layout:include="DialogoConfirmacaoExclusaoComputador"></div>
+
+	</div>
+</section>
+
+</html>
