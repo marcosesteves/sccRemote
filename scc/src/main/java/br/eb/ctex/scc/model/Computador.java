@@ -18,6 +18,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
+// Classe Computador
 @Entity()
 public class Computador {
 	
