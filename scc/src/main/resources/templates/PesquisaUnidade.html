@@ -11,7 +11,7 @@
 
 	<div layout:include="MensagemGeral"></div>
 
-	<div class="panel panel-default">
+	<div class="panel panel-default panel-default-uniOrg">
 		<div class="panel-heading">
 			<div class="clearfix">
 				<h1 class="panel-title aw-titulo-panel">Pesquisa de Unidade
@@ -39,13 +39,14 @@
 			</form>
 			
 			<div class="table-responsive">
-				<table class="table table-bordered table-striped">
+				<table id="tabela-unidade" class="table table-bordered table-striped">
 					<thead>
 						<tr>
 							<th class="text-center col-md-1">#</th>
-							<th class="text-center col-md-1">Sigla</th>
-							<th class="text-center col-md-3">Nome</th>
-							<th class="text-center col-md-1">Ramal</th>
+							<th class="text-center col-md-2">Sigla</th>
+							<th class="text-center col-md-6">Nome</th>
+							<th class="text-center col-md-2">Ramal</th>
+							<th class="text-center col-md-1"></th>
 						</tr>
 					</thead>
 					<tbody>

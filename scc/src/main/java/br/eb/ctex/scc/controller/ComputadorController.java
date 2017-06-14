@@ -35,7 +35,6 @@ public class ComputadorController {
 
 	
 	@RequestMapping("/novo")
-	@ModelAttribute("listaDeUnidades")
 	public ModelAndView novo() {
 		ModelAndView mv = new ModelAndView("CadastroComputador");
 		List<UnidadeOrganizacional> listaUnidades = unidadeService.buscarTodasUnidades();
@@ -69,8 +68,10 @@ public class ComputadorController {
 	
 	@RequestMapping(value="{idComp}")
 	public ModelAndView edicao(@PathVariable("idComp") Computador computador) {
-		ModelAndView mv = new ModelAndView("CadastroComputador"); 
+		ModelAndView mv = new ModelAndView("CadastroComputador");
+		List<UnidadeOrganizacional> listaUnidades = unidadeService.buscarTodasUnidades();
 		mv.addObject(computador);
+		mv.addObject("listaDeUnidades", listaUnidades);
 		return mv;
 	}
 	
