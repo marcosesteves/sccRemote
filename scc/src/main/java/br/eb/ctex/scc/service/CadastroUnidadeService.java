@@ -16,6 +16,7 @@ public class CadastroUnidadeService {
 	UnidadesOrganizacionais unidades;
 
 	public void salvar(UnidadeOrganizacional unidade) {
+		unidade.setSiglaUnidade(unidade.getSiglaUnidade().toUpperCase());
 		unidades.save(unidade);
 	}
 
@@ -24,7 +25,7 @@ public class CadastroUnidadeService {
 	}
 
 	public List<UnidadeOrganizacional> filtrar(UnidadeOrganizacionalFilter filtro) {
-		String siglaUnidade = filtro.getSiglaUnidade() == null ? "%" : filtro.getSiglaUnidade();
+		String siglaUnidade = filtro.getSiglaUnidade() == null ? "%" : filtro.getSiglaUnidade().toUpperCase();
 		return unidades.findBySiglaUnidadeContaining(siglaUnidade);
 	}
 

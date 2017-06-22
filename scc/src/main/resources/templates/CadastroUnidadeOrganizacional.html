@@ -30,9 +30,9 @@
 			
 				<div class="form-group"
 					th:classappend="${#fields.hasErrors('siglaUnidade')} ? has-error">
-					<label for="siglaUnidade" class="col-sm-2 control-label">Sigla
+					<label for="siglaUnidade" class="col-lg-2 control-label">Sigla
 						da Unidade</label>
-					<div class="col-sm-2">
+					<div class="col-lg-10 col-lg-1" >
 						<input type="text" class="form-control" id="siglaUnidade"
 							th:field="*{siglaUnidade}" />
 					</div>
@@ -40,9 +40,9 @@
 
 				<div class="form-group"
 					th:classappend="${#fields.hasErrors('nomeUnidade')} ? has-error">
-					<label for="nomeUnidade" class="col-sm-2 control-label">Nome
+					<label for="nomeUnidade" class="col-lg-2 control-label">Nome
 						da Unidade</label>
-					<div class="col-sm-2">
+					<div class="col-lg-3">
 						<input type="text" class="form-control" id="nomeUnidade"
 							th:field="*{nomeUnidade}" />
 					</div>
@@ -50,8 +50,8 @@
 
 				<div class="form-group"
 					th:classappend="${#fields.hasErrors('ramalUnidade')} ? has-error">
-					<label for="ramalUnidade" class="col-sm-2 control-label">Ramal</label>
-					<div class="col-sm-2">
+					<label for="ramalUnidade" class="col-lg-2 control-label">Ramal</label>
+					<div class="col-lg-10 col-lg-1">
 						<input type="text" class="form-control" id="ramalUnidade"
 							th:field="*{ramalUnidade}" />
 					</div>

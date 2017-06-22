@@ -33,3 +33,38 @@
 	width: 70%;
 	margin: 0px auto;
 }
+
+.cor-destaque {
+	color: blue;
+}
+
+#alinha-logo {
+	margin-top: 20px;
+	
+}
+
+#exibe-a-direita {
+	float: right;
+}
+
+.table { 
+	display: table; 
+	text-align: center;
+}
+
+.row1 { 
+	display: table-row; 
+}
+.cell { 
+	display: table-cell; 
+	vertical-align: middle;
+	float: left;
+	padding-left: 10px;
+}
+h1 {
+	color: blue;
+	
+}
+h2 { 
+	margin-left:  500px;
+}
