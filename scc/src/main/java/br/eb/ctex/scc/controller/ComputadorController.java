@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.eb.ctex.scc.model.Computador;
 import br.eb.ctex.scc.model.UnidadeOrganizacional;
+import br.eb.ctex.scc.model.Usuario;
 import br.eb.ctex.scc.reporitory.filter.ComputadorFilter;
 import br.eb.ctex.scc.service.CadastroComputadorService;
 import br.eb.ctex.scc.service.CadastroUnidadeService;
@@ -33,6 +34,24 @@ public class ComputadorController {
 	@Autowired
 	CadastroUnidadeService unidadeService;
 
+	
+	@RequestMapping("/login")
+	public ModelAndView login() {
+		ModelAndView mv = new ModelAndView("Login");
+		mv.addObject(new Usuario());
+		return mv;
+	}
+	
+	@RequestMapping("/validaLogin")
+	public String validaLogin(@Validated Usuario usuario, Errors erros, RedirectAttributes attributes) {
+		if (erros.hasErrors()) {
+			return "Login"; }
+		System.out.println("Login ---> "+ usuario.getLogin());
+		System.out.println("Senha ---> "+ usuario.getSenha());
+		return "CadastroComputador";
+	}
+	
+	
 	
 	@RequestMapping("/novo")
 	public ModelAndView novo() {

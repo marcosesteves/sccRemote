@@ -68,3 +68,12 @@ h1 {
 h2 { 
 	margin-left:  500px;
 }
+
+.afasta-do-topo {
+	padding-top: 20px;
+}
+
+.afasta-ao-redor {
+	margin-left: 50px;
+	margin-bottom: 10px;
+}

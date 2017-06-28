@@ -29,6 +29,7 @@ public class Computador {
 	@NotEmpty(message = "O Nome/Código do computador são obrigatórios")
 	private String nomeCodigo;
 	
+	@NotEmpty(message = "O usuário é origatório")
 	private String usuario;
 	
 	@NotEmpty(message = "O numero IP é obrigatório")

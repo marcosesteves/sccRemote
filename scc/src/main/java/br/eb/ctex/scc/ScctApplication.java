@@ -24,12 +24,13 @@ public LocaleResolver localeResolver() {
 	return new FixedLocaleResolver(new Locale("pt","BR"));
 }
 
+
 @Configuration
 public static class MvcConfig extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addRedirectViewController("/", "/cadastroComputador");
-	}
-}
+	}  
+}  
 }
