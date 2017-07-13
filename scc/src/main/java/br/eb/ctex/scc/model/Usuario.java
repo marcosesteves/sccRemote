@@ -10,6 +10,23 @@ public class Usuario {
 	@NotEmpty(message = "A senha é obrigatória")
 	private String senha;
 	
+	private String nome;
+	
+	private String posto;
+	
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public String getPosto() {
+		return posto;
+	}
+	public void setPosto(String posto) {
+		this.posto = posto;
+	}
+	
 	public String getLogin() {
 		return login;
 	}

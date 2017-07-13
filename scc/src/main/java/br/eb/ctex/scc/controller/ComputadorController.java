@@ -3,6 +3,8 @@ package br.eb.ctex.scc.controller;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,8 @@ import br.eb.ctex.scc.model.Usuario;
 import br.eb.ctex.scc.reporitory.filter.ComputadorFilter;
 import br.eb.ctex.scc.service.CadastroComputadorService;
 import br.eb.ctex.scc.service.CadastroUnidadeService;
+import br.eb.ctex.scc.util.LCAuth;
+
 
 
 @Controller
@@ -43,11 +47,15 @@ public class ComputadorController {
 	}
 	
 	@RequestMapping("/validaLogin")
-	public String validaLogin(@Validated Usuario usuario, Errors erros, RedirectAttributes attributes) {
+	public String validaLogin(@Validated Usuario usuario, Errors erros, RedirectAttributes attributes, HttpSession session) {
 		if (erros.hasErrors()) {
 			return "Login"; }
 		System.out.println("Login ---> "+ usuario.getLogin());
 		System.out.println("Senha ---> "+ usuario.getSenha());
+		boolean achou = LCAuth.autentica(usuario.getLogin(), usuario.getSenha(), session);
+		System.out.println("achou ---> "+ achou);
+		if (achou)
+			System.out.println("<--- Usuario encontrado ---> ");
 		return "CadastroComputador";
 	}
 	
