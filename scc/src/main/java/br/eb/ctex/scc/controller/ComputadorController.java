@@ -27,6 +27,8 @@ import br.eb.ctex.scc.util.LCAuth;
 
 
 
+
+
 @Controller
 @RequestMapping("/cadastroComputador")
 public class ComputadorController {
@@ -38,13 +40,13 @@ public class ComputadorController {
 	@Autowired
 	CadastroUnidadeService unidadeService;
 
-	
 	@RequestMapping("/login")
 	public ModelAndView login() {
 		ModelAndView mv = new ModelAndView("Login");
-		mv.addObject(new Usuario());
+		mv.addObject(new Usuario());		
 		return mv;
 	}
+	
 	
 	@RequestMapping("/validaLogin")
 	public String validaLogin(@Validated Usuario usuario, Errors erros, RedirectAttributes attributes, HttpSession session) {
@@ -55,10 +57,14 @@ public class ComputadorController {
 		boolean achou = LCAuth.autentica(usuario.getLogin(), usuario.getSenha(), session);
 		System.out.println("achou ---> "+ achou);
 		if (achou)
+		{
 			System.out.println("<--- Usuario encontrado ---> ");
-		return "CadastroComputador";
+			return "redirect:/cadastroComputador/novo";
+		}
+		erros.reject("Login e/ou senha inválido(s)!");
+//		return "Login";
+		return "redirect:/cadastroComputador/login";
 	}
-	
 	
 	
 	@RequestMapping("/novo")

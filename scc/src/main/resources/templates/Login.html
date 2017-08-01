@@ -24,11 +24,11 @@
 
 				<div class="input-group afasta-do-topo" th:classappend="${#fields.hasErrors('login')} ? has-error">
 					<span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
-					<input id="inputLoginDanger" type="text" class="form-control form-control-danger" name="login" placeholder="Login"  th:field="*{login}"/>
+					<input id="inputLoginDanger" type="text" class="form-control form-control-danger" name="username" placeholder="Login"  th:field="*{login}"/>
 				</div>
 				<div class="input-group afasta-do-topo" th:classappend="${#fields.hasErrors('senha')} ? has-error">
 					<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-					<input id="inputSenhaDanger" type="password" class="form-control form-control-danger" name="senha" placeholder="senha"  th:field="*{senha}"/>
+					<input id="inputSenhaDanger" type="password" class="form-control form-control-danger" name="password" placeholder="senha"  th:field="*{senha}"/>
 				</div>
 				<div class="input-group afasta-do-topo">
 					<button type="submit" class="btn btn-default btn-lg active afasta-ao-redor">Enviar</button>
