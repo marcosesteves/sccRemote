@@ -8,10 +8,15 @@
 </head>
 
 <section layout:fragment="conteudo">
-	<form class="form-horizontal" method="POST"	th:action="@{/cadastroComputador}" th:object="${computador}">
-		
+	<form class="form-horizontal" method="POST"
+		th:action="@{/cadastroComputador}" th:object="${computador}">
+
 		<div layout:include="MensagemGeral"></div>
 		<div layout:include="MensagemErro"></div>
+		
+		<div class="alert alert-danger" th:if="${#lists.isEmpty(listaDeUnidades)}">
+			<span> É necessario ter Unidade cadastrada antes de cadastrar computador!></span>
+		</div>
 		
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -22,20 +27,24 @@
 			</div>
 
 			<div class="panel-body">
-			
-				<input type="hidden" th:field="*{idComp}"/>
-			
-				<div class="form-group" >
-					<label for="siglaUnidade" class="col-sm-2 control-label">Sigla da Unidade</label>
-					<div class="col-sm-2" >
-						<select class="form-control" id="siglaUnidade" th:field="*{unidade.idUnidade}" >
+
+				<input type="hidden" th:field="*{idComp}" />
+
+				<div class="form-group" th:classappend="${#lists.isEmpty(listaDeUnidades)} ? has-error">
+					<label for="siglaUnidade" class="col-sm-2 control-label">Sigla
+						da Unidade</label>
+					<div class="col-sm-2">
+						<select class="form-control" id="siglaUnidade"
+							th:field="*{unidade.idUnidade}">
 							<option th:each="cadaUnidade : ${listaDeUnidades}"
-								th:value="${cadaUnidade.idUnidade}" th:text="${cadaUnidade.siglaUnidade}"></option>
+								th:value="${cadaUnidade.idUnidade}"
+								th:text="${cadaUnidade.siglaUnidade}"></option>
 						</select>
 					</div>
 				</div>
 
-				<div class="form-group" th:classappend="${#fields.hasErrors('usuario')} ? has-error">
+				<div class="form-group"
+					th:classappend="${#fields.hasErrors('usuario')} ? has-error">
 					<label for="usuario" class="col-sm-2 control-label">Usuario</label>
 					<div class="col-sm-3">
 						<input type="text" class="form-control" id="usuario"
@@ -43,7 +52,8 @@
 					</div>
 				</div>
 
-				<div class="form-group" th:classappend="${#fields.hasErrors('nomeCodigo')} ? has-error">
+				<div class="form-group"
+					th:classappend="${#fields.hasErrors('nomeCodigo')} ? has-error">
 					<label for="nomeCodigo" class="col-sm-2 control-label">Nome/Código</label>
 					<div class="col-sm-2">
 						<input type="text" class="form-control" id="nomeCodigo"
@@ -51,36 +61,47 @@
 					</div>
 				</div>
 
-				<div class="form-group" th:classappend="${#fields.hasErrors('numIp')} ? has-error">
+				<div class="form-group"
+					th:classappend="${#fields.hasErrors('numIp')} ? has-error">
 					<label for="numIp" class="col-sm-2 control-label">Nº IP</label>
 					<div class="col-sm-2">
-						<input type="text" class="form-control" id="numIp" th:field="*{numIp}" />
+						<input type="text" class="form-control" id="numIp"
+							th:field="*{numIp}" />
 					</div>
 				</div>
 
-				<div class="form-group" th:classappend="${#fields.hasErrors('placaMae')} ? has-error">
-					<label for="placaMae" class="col-sm-2 control-label">Placa Mãe (Fab./Mod)</label>
+				<div class="form-group"
+					th:classappend="${#fields.hasErrors('placaMae')} ? has-error">
+					<label for="placaMae" class="col-sm-2 control-label">Placa
+						Mãe (Fab./Mod)</label>
 					<div class="col-sm-2">
-						<input type="text" class="form-control" id="placaMae" th:field="*{placaMae}" />
+						<input type="text" class="form-control" id="placaMae"
+							th:field="*{placaMae}" />
 					</div>
 				</div>
 
-				<div class="form-group" th:classappend="${#fields.hasErrors('processador')} ? has-error">
-					<label for="processador" class="col-sm-2 control-label">Processador	(Fab. Mod. Freq.)</label>
+				<div class="form-group"
+					th:classappend="${#fields.hasErrors('processador')} ? has-error">
+					<label for="processador" class="col-sm-2 control-label">Processador
+						(Fab. Mod. Freq.)</label>
 					<div class="col-sm-2">
-						<input type="text" class="form-control" id="processador" th:field="*{processador}" />
+						<input type="text" class="form-control" id="processador"
+							th:field="*{processador}" />
 					</div>
 				</div>
 
-				<div class="form-group" th:classappend="${#fields.hasErrors('memoriaRam')} ? has-error">
-					<label for="memoriaRam" class="col-sm-2 control-label">Memoria RAM</label>
+				<div class="form-group"
+					th:classappend="${#fields.hasErrors('memoriaRam')} ? has-error">
+					<label for="memoriaRam" class="col-sm-2 control-label">Memoria
+						RAM</label>
 					<div class="col-sm-1">
 						<input type="text" class="form-control" id="memoriaRam"
 							th:field="*{memoriaRam}" />
 					</div>
 				</div>
 
-				<div class="form-group" th:classappend="${#fields.hasErrors('hd')} ? has-error">
+				<div class="form-group"
+					th:classappend="${#fields.hasErrors('hd')} ? has-error">
 					<label for="hd" class="col-sm-2 control-label">Disco Rígido</label>
 					<div class="col-sm-1">
 						<input type="text" class="form-control" id="hd" th:field="*{hd}" />
@@ -89,34 +110,34 @@
 
 				<div class="form-group">
 					<div class="row">
-						<label for="tipoComp" class="col-sm-2 control-label">Tipo de Computador:</label>
-						 <label class="radio-inline">
-						 	<input	name="tipoComp" id="radio1" value="DESKTOP" type="radio" checked="checked"/>Desktop
-						 </label>
-						 <label class="radio-inline">
-						 	<input name="tipoComp" id="radio2" value="LEPTOP" type="radio" />Laptop
-						 </label>
-						 <label class="radio-inline">
-						 	<input name="tipoComp" id="radio3" value="SERVIDOR" type="radio" />Servidor
+						<label for="tipoComp" class="col-sm-2 control-label">Tipo
+							de Computador:</label> <label class="radio-inline"> <input
+							name="tipoComp" id="radio1" value="DESKTOP" type="radio"
+							checked="checked" />Desktop
+						</label> <label class="radio-inline"> <input name="tipoComp"
+							id="radio2" value="LEPTOP" type="radio" />Laptop
+						</label> <label class="radio-inline"> <input name="tipoComp"
+							id="radio3" value="SERVIDOR" type="radio" />Servidor
 						</label>
 					</div>
 				</div>
 
 
-				<div class="form-group" >
+				<div class="form-group">
 					<div class="row">
-						<label for="sistOper" class="col-sm-2 control-label">Sistema Operacional:</label>
-						<label class="radio-inline">
-							<input name="sistOper" id="radio1" value="Windows" type="radio" checked="checked"/>Windows
-						</label>
-						<label class="radio-inline">
-							<input name="sistOper" id="radio2" value="Linux" type="radio" />Linux
+						<label for="sistOper" class="col-sm-2 control-label">Sistema
+							Operacional:</label> <label class="radio-inline"> <input
+							name="sistOper" id="radio1" value="Windows" type="radio"
+							checked="checked" />Windows
+						</label> <label class="radio-inline"> <input name="sistOper"
+							id="radio2" value="Linux" type="radio" />Linux
 						</label>
 					</div>
 				</div>
 
 
-				<div class="form-group" th:classappend="${#fields.hasErrors('tecnico')} ? has-error">
+				<div class="form-group"
+					th:classappend="${#fields.hasErrors('tecnico')} ? has-error">
 					<label for="tecnico" class="col-sm-2 control-label">Técnico</label>
 					<div class="col-sm-2">
 						<select class="form-control" id="tecnico" th:field="*{tecnico}">
@@ -126,12 +147,16 @@
 					</div>
 				</div>
 
-				<div class="form-group" th:classappend="${#fields.hasErrors('dataCadastro')} ? has-error">
-					<label for="dataCadastro" class="col-sm-2 control-label">Data de Cadastro</label>
+				<div class="form-group"
+					th:classappend="${#fields.hasErrors('dataCadastro')} ? has-error">
+					<label for="dataCadastro" class="col-sm-2 control-label">Data
+						de Cadastro</label>
 					<div class="col-sm-2">
-						<input type="text" class="form-control" id="dataCadastro" th:field="*{dataCadastro}"
-						data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt-BR"
-						data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="top"/>
+						<input type="text" class="form-control" id="dataCadastro"
+							th:field="*{dataCadastro}" data-provide="datepicker"
+							data-date-format="dd/mm/yyyy" data-date-language="pt-BR"
+							data-date-autoclose="true" data-date-today-highlight="true"
+							data-date-orientation="top" />
 					</div>
 				</div>
 				<div class="form-group">
@@ -140,6 +165,9 @@
 					</div>
 				</div>
 			</div>
+			<a class="btn btn-link aw-link-panel" th:href="@{/cadastroComputador/logout}" title="Sair" rel="tooltip" data-placement="top"> 
+				<span class="glyphicon glyphicon-off"></span>
+			</a> 
 		</div>
 	</form>
 </section>

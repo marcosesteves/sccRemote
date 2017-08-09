@@ -10,6 +10,8 @@
 <section layout:fragment="conteudo">
 
 	<div layout:include="MensagemGeral"></div>
+	
+	<a class="btn btn-link" th:href="@{/cadastroComputador}">Cadastrar Computadores</a>
 
 	<div class="panel panel-default panel-default-uniOrg">
 		<div class="panel-heading">
@@ -73,6 +75,9 @@
 						</tr>
 					</tbody>
 				</table>
+				<a class="btn btn-link aw-link-panel" th:href="@{/unidadeOrganizacional/logout}" title="Sair" rel="tooltip" data-placement="top"> 
+					<span class="glyphicon glyphicon-off"></span>
+				</a> 
 			</div>
 		</div>
 		

@@ -13,13 +13,17 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object controller)
 			throws Exception {
 		String uri = request.getRequestURI();
-		if (uri.endsWith("login") || uri.endsWith("validaLogin") || uri.contains("resources")) {
+
+		if  (uri.endsWith("login") || uri.endsWith("validaLogin") || uri.contains("resources"))  {
 			return true;
 		}
 		if (request.getSession().getAttribute("usuarioLogado") != null) {
 			return true;
 		}
-		response.sendRedirect("/cadastroComputador/login");
+//		if (uri.contains("cadastroComputador") || uri.endsWith("/"))
+			response.sendRedirect("/cadastroComputador/login");
+//		else
+//			response.sendRedirect("/unidadeOrganizacional/login");
 		return false;
 	}
 

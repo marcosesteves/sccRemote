@@ -36,7 +36,7 @@ public class Computador {
 	@Size(min = 8, max = 16, message = "O número IP tem que ter no mínimo 8 e no máximo 16 caracteres")
 	private String numIp;
 	
-	@NotEmpty(message = "A placa mãe é obrigatória obrigatórios")
+	@NotEmpty(message = "A placa mãe é obrigatória")
 	private String placaMae;
 	
 	@NotEmpty(message = "O processador é obrigatório")

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,10 +25,6 @@ import br.eb.ctex.scc.reporitory.filter.ComputadorFilter;
 import br.eb.ctex.scc.service.CadastroComputadorService;
 import br.eb.ctex.scc.service.CadastroUnidadeService;
 import br.eb.ctex.scc.util.LCAuth;
-
-
-
-
 
 @Controller
 @RequestMapping("/cadastroComputador")
@@ -47,28 +44,27 @@ public class ComputadorController {
 		return mv;
 	}
 	
+	@RequestMapping("logout")
+	public String logout(HttpSession session) {
+	  session.invalidate();
+	  return "redirect:/cadastroComputador/login";
+	}
 	
 	@RequestMapping("/validaLogin")
 	public String validaLogin(@Validated Usuario usuario, Errors erros, RedirectAttributes attributes, HttpSession session) {
-		if (erros.hasErrors()) {
-			return "Login"; }
-		System.out.println("Login ---> "+ usuario.getLogin());
-		System.out.println("Senha ---> "+ usuario.getSenha());
+		if (erros.hasErrors()) 
+			return "Login"; 
 		boolean achou = LCAuth.autentica(usuario.getLogin(), usuario.getSenha(), session);
-		System.out.println("achou ---> "+ achou);
 		if (achou)
-		{
-			System.out.println("<--- Usuario encontrado ---> ");
-			return "redirect:/cadastroComputador/novo";
-		}
-		erros.reject("Login e/ou senha inválido(s)!");
-//		return "Login";
-		return "redirect:/cadastroComputador/login";
+			return "redirect:/cadastroComputador";
+		erros.rejectValue("login", null, "O Login não pode ser efetuado com sucesso!");
+		erros.rejectValue("senha", null, "");
+		return "Login";
 	}
 	
 	
 	@RequestMapping("/novo")
-	public ModelAndView novo() {
+	public ModelAndView novo(Model model) {
 		ModelAndView mv = new ModelAndView("CadastroComputador");
 		List<UnidadeOrganizacional> listaUnidades = unidadeService.buscarTodasUnidades();
 		mv.addObject(new Computador());
@@ -77,6 +73,24 @@ public class ComputadorController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
+	public String salvar(@Validated Computador computador, Errors erros, RedirectAttributes attributes, Model model) {
+		if (erros.hasErrors()) {
+			List<UnidadeOrganizacional> listaUnidades = unidadeService.buscarTodasUnidades();
+			model.addAttribute("listaDeUnidades", listaUnidades);
+			return "CadastroComputador"; }
+		
+		try {
+			computadorService.salvar(computador);			
+			attributes.addFlashAttribute("mensagem", "Computador Salvo com Sucesso");
+			return "redirect:/cadastroComputador/novo";
+		}
+		catch (DataIntegrityViolationException e) {
+			erros.rejectValue("dataCadastro", null, "Formato de data inválido");
+			return "CadastroComputador";
+		}
+	}
+	
+/*	@RequestMapping(method = RequestMethod.POST)
 	public String salvar(@Validated Computador computador, Errors erros, RedirectAttributes attributes) {
 		
 		if (erros.hasErrors()) {
@@ -92,7 +106,7 @@ public class ComputadorController {
 			return "CadastroComputador";
 		}
 	}
-	
+*/
 	@ModelAttribute("todosTecnicos")
 	public List<String> disponibilizaTecnicos() {
 		String tecnicos[] = {"Almir","Marcelo","Castro","Jode Carlos"};

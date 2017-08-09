@@ -6,5 +6,8 @@
 <div class="alert alert-success" th:if="${!#strings.isEmpty(mensagem)}">
 	<span th:text="${mensagem}"></span>
 </div>
+<div class="alert alert-danger" th:if="${!#strings.isEmpty(algumProblema)}">
+	<span th:text="${algumProblema}"></span>
+</div>
 
 </html>
