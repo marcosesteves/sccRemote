@@ -21,7 +21,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 			return true;
 		}
 //		if (uri.contains("cadastroComputador") || uri.endsWith("/"))
-			response.sendRedirect("/cadastroComputador/login");
+			response.sendRedirect("/scc/cadastroComputador/login");
 //		else
 //			response.sendRedirect("/unidadeOrganizacional/login");
 		return false;
