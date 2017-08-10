@@ -19,8 +19,8 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/").setViewName("LoginComputador");
-//		registry.addRedirectViewController("/", "/cadastroComputador/login");
-		System.out.println("------   Redirecionado para cadastroComputador/login = "+registry);
+//		registry.addViewController("/").setViewName("Login");
+		System.out.println("Passei pelo addRedirectViewController!!!!!!!!!!!!!!!!!!!!!!");
+		registry.addRedirectViewController("/", "/cadastroComputador/login");
 	}  	
 }

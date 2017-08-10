@@ -20,10 +20,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 		if (request.getSession().getAttribute("usuarioLogado") != null) {
 			return true;
 		}
-//		if (uri.contains("cadastroComputador") || uri.endsWith("/"))
-			response.sendRedirect("/scc/cadastroComputador/login");
-//		else
-//			response.sendRedirect("/unidadeOrganizacional/login");
+		response.sendRedirect("/scc/cadastroComputador/login");
 		return false;
 	}
 
